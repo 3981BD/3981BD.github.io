@@ -27,7 +27,7 @@ jobs:
 
       # Archive the repo
       - name: Create the archive
-        run: "tar -cvf artifact.tar ."
+        run: "tar -cvf artifact.tar ${{ github.workspace }}"
       
   deploy:
     runs-on: ubuntu-latest
