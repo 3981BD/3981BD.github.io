@@ -38,16 +38,12 @@ jobs:
           
       - name: artifact-upload
         id: artifact-upload
-        uses: paper-spa/upload-artifact@main
-        
+        uses: actions/upload-artifact@main
         with:
           name: pages-test
           path: artifact.tar
-          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Deploy the artifact
-        uses: paper-spa/check-deployment-status@main
+        uses: paper-spa/deploy-pages@main
         with:
-          # Example: https://api.github.com/repos/3981BD/supreme-pancake/pages/f8cf4fa90bdd5b07646e297c554fed4d79b628ae/deployment_status
-          status_url: "https://api.github.com/repos/${{ github.repository }}/pages/${{ github.sha }}/deployment_status"
           token: ${{ secrets.GITHUB_TOKEN }}
