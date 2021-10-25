@@ -16,9 +16,16 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  package-and-deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: "https://3981BD.github.io"
+    
+    outputs:
+      status_url: ${{steps.artifact-upload.outputs.status_url}}
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,19 +35,7 @@ jobs:
       # Archive the repo
       - name: Create the archive
         run: "tar -cvf artifact.tar --exclude=.git --exclude=artifact.tar ."
-      
-  deploy:
-    runs-on: ubuntu-latest
-    
-    outputs:
-      status_url: ${{steps.artifact-upload.outputs.status_url}}
-
-    needs: build
-    environment:
-      name: github-pages
-      url: "https://3981BD.github.io"
-    
-    steps:
+          
       - name: artifact-upload
         id: artifact-upload
         uses: paper-spa/upload-artifact@main
