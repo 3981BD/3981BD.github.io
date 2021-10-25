@@ -29,20 +29,31 @@ jobs:
       - name: Create the archive
         run: "tar -cvf artifact.tar ."
       
-      - name: artifact-upload
-        id: artifact-upload
-        uses: actions/upload-artifact@main
-        with:
-          name: pages-test
-          path: "./artifact.tar"
-
   deploy:
     runs-on: ubuntu-latest
+    
+    outputs:
+      status_url: ${{steps.artifact-upload.outputs.status_url}}
+
     needs: build
     environment:
       name: github-pages
       url: "https://3981BD.github.io"
     
     steps:
+      - name: artifact-upload
+        id: artifact-upload
+        uses: paper-spa/upload-artifact@main
+        
+        with:
+          name: pages-test
+          path: "./artifact.tar"
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Deploy the artifact
-        uses: paper-spa/deploy-pages@main
+        uses: paper-spa/check-deployment-status@main
+        with:
+          status_url: "${{ steps.artifact-upload.outputs.status_url }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status_url: "${{ steps.artifact-upload.outputs.status_url }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
