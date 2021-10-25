@@ -55,5 +55,3 @@ jobs:
         with:
           status_url: "${{ steps.artifact-upload.outputs.status_url }}"
           token: ${{ secrets.GITHUB_TOKEN }}
-          status_url: "${{ steps.artifact-upload.outputs.status_url }}"
-          token: ${{ secrets.GITHUB_TOKEN }}
