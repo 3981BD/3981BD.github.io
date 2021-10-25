@@ -47,7 +47,7 @@ jobs:
         
         with:
           name: pages-test
-          path: "./artifact.tar"
+          path: artifact.tar
           token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Deploy the artifact
