@@ -22,9 +22,6 @@ jobs:
     environment:
       name: github-pages
       url: "https://3981BD.github.io"
-    
-    outputs:
-      status_url: ${{steps.artifact-upload.outputs.status_url}}
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
