@@ -1,5 +1,3 @@
-Test with uploading an image
+# Nothing to See Here
 
-<img width="692" alt="image" src="https://user-images.githubusercontent.com/13207348/110680386-8a503a80-81a6-11eb-8be6-20d67a4f277a.png">
-
-Test 2
+This branch only exists to "enable" Pages. All the magic happens in the workflow defined in the [`main`](https://github.com/tcbyrd/astro-portfolio-demo/tree/main) branch
