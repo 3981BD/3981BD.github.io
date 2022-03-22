@@ -1,5 +1,5 @@
 export const SITE = {
-	title: 'Update Documentation from a fork',
+	title: 'Documentation from a fork',
 	description: 'Your website description.',
 	defaultLanguage: 'en_US',
 };
