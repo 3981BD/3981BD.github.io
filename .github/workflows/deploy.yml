@@ -9,6 +9,9 @@ on:
 
 jobs:
   astro-build:
+    permissions:
+      # Only allow read token for building
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
