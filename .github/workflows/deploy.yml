@@ -12,9 +12,6 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      domain:
-      environment:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: "https://3981BD.github.io"
+      url: ${{ steps.deployment.outputs.page_url }}
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -44,6 +41,7 @@ jobs:
           path: artifact.tar
       
       - name: Deploy the artifact
+        id: deployment
         uses: paper-spa/deploy-pages@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          preview: ${{ github.event_name == 'pull_request' }}
