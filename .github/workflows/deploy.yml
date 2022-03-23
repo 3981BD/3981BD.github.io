@@ -3,17 +3,34 @@ name: astro-page-build
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  workflow_dispatch:
+  pull_request_target:
 
 jobs:
   astro-build:
+    permissions:
+      # Only allow read token for building
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      #
+      # Separate PR checkout when event is pull_request_target
+      #
+    - name: Checkout PR
+      if: ${{ github.event_name == 'pull_request_target' }}
+      uses: actions/checkout@v2
+      with:
+        # For PRs make sure to checkout the PR branch
+        ref: ${{github.event.pull_request.head.ref}}
+        repository: ${{github.event.pull_request.head.repo.full_name}}
+
+      #
+      # Normal checkout without forks
+      #
+    - name: Checkout
+      if: ${{ github.event_name != 'pull_request_target' }}
+      uses: actions/checkout@v2
+
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
@@ -45,4 +62,4 @@ jobs:
         uses: paper-spa/deploy-pages@main
         with:
           # Deploy Pull Request builds to a preview site
-          preview: ${{ github.event_name == 'pull_request' }}
+          preview: ${{ github.event_name == 'pull_request_target' }}
