@@ -1,5 +1,5 @@
 export const SITE = {
-	title: 'Deploy from a fork!',
+	title: 'Deploy from a fork With another commit!',
 	description: 'Your website description.',
 	defaultLanguage: 'en_US',
 };
