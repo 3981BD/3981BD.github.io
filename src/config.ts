@@ -1,5 +1,5 @@
 export const SITE = {
-	title: 'Is this still working?',
+	title: 'Deploy a preview',
 	description: 'Your website description.',
 	defaultLanguage: 'en_US',
 };
