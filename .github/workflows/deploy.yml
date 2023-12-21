@@ -32,6 +32,24 @@ jobs:
       if: ${{ github.event_name != 'pull_request_target' }}
       uses: actions/checkout@v4
 
+    - name: Pre Deployment Verification
+      run: |
+        # Get the current deployed commit SHA
+        CURRENT_SHA=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/deployments?environment=github-pages" \
+          | jq -r '.[0].sha')
+
+        # Get the head commit SHA for the ref
+        HEAD_SHA=$(git rev-parse HEAD)
+
+        # Compare the commit timestamps
+        if [[ $(git show -s --format=%ct $CURRENT_SHA) -gt $(git show -s --format=%ct $HEAD_SHA) ]]; then
+          echo "The head SHA for the ref is older than the one currently deployed."
+        else
+          echo "The head SHA for the ref is newer or the same as the one currently deployed."
+        fi
+
+
     - uses: actions/setup-node@v4
       with:
         node-version: '20'
