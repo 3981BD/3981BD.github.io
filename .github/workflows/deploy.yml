@@ -46,7 +46,9 @@ jobs:
         if [[ $(git show -s --format=%ct $CURRENT_SHA) -gt $(git show -s --format=%ct $HEAD_SHA) ]]; then
           echo "The head SHA for the ref is older than the one currently deployed."
         else
-          echo "The head SHA for the ref is newer or the same as the one currently deployed."
+          echo "The head SHA for the ref ($HEAD_SHA) is newer or the same as the one currently deployed ($CURRENT_SHA)."
+          echo "::error::The head SHA for the ref ($HEAD_SHA) is newer or the same as the one currently deployed ($CURRENT_SHA)."
+          exit 1
         fi
 
 
