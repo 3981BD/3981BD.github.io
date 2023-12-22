@@ -25,13 +25,21 @@ except Exception as e:
     print(f"::error::Failed to fetch comparison data: {e}")
     raise
 
-print(f"::notice::response: {response}")
 data = json.loads(response)
+
+status = data.get('status')
+ahead_by = data.get('ahead_by')
+behind_by = data.get('behind_by')
+
 # check if data contains an error response
 if 'message' in data:
     print(f"::warning::errors: {data['message']}")
     raise ValueError(f"GitHub API returned an error: {data['message']}")
 
-print(f"::notice::comparison['status']: {data['status']}")
+print(f"::notice::comparison: \n"
+      f"\"status\": {status}\n"
+      f"\"ahead_by\": {ahead_by}\n"
+      f"\"behind_by\": {behind_by}"
+)
 print(f"::notice::GITHUB_SHA: {github_sha}")
 print(f"::notice::pages_build_version: {pages_build_version}")
