@@ -40,10 +40,10 @@ jobs:
         import subprocess
         import os
         from urllib.request import urlopen
-        latest_commit = subprocess.getoutput('git rev-parse HEAD').strip()
         github_sha = os.environ['GITHUB_SHA']
         pages_build_version = urlopen('https://subdomain.func.host/pages-build-version').read().decode()
-        print(f"::notice::latest_commit: {latest_commit}")
+        rev_list = subprocess.getoutput('git rev-list {pages_build_version}..{github_sha}').strip()
+        print(f"::notice::rev_list: {rev_list}")
         print(f"::notice::GITHUB_SHA: {github_sha}")
         print(f"::notice::pages-build-version: {pages_build_version}")
       env:
