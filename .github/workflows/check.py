@@ -36,11 +36,10 @@ if 'message' in data:
     print(f"::warning::errors: {data['message']}")
     raise ValueError(f"GitHub API returned an error: {data['message']}")
 
-print(f"::notice::comparison<<EOF \n"
-      f"\"status\": {status}\n"
-      f"\"ahead_by\": {ahead_by}\n"
-      f"\"behind_by\": {behind_by}\n"
-      f"EOF"
-)
-print(f"::notice::GITHUB_SHA: {github_sha}")
-print(f"::notice::pages_build_version: {pages_build_version}")
+print("::group::comparison")
+print(f"\"status\": {status}")
+print(f"\"ahead_by\": {ahead_by}")
+print(f"\"behind_by\": {behind_by}")
+print(f"GITHUB_SHA: {github_sha}")
+print(f"pages_build_version: {pages_build_version}")
+print("::endgroup::")
