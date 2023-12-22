@@ -37,9 +37,9 @@ if 'message' in data:
     raise ValueError(f"GitHub API returned an error: {data['message']}")
 
 print("::group::comparison")
-print(f"\"status\": {status}")
-print(f"\"ahead_by\": {ahead_by}")
-print(f"\"behind_by\": {behind_by}")
+print(f"status: {status}")
+print(f"ahead_by: {ahead_by}")
+print(f"behind_by: {behind_by}")
 print(f"GITHUB_SHA: {github_sha}")
 print(f"pages_build_version: {pages_build_version}")
 print("::endgroup::")
