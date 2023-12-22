@@ -38,6 +38,7 @@ jobs:
       id: check
       run: |
         import subprocess
+        import os
         from urllib.request import urlopen
         latest_commit = subprocess.getoutput('git rev-parse HEAD').strip()
         github_sha = os.environ('GITHUB_SHA')
