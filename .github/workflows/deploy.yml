@@ -42,10 +42,10 @@ jobs:
         from urllib.request import urlopen
         github_sha = os.environ['GITHUB_SHA']
         pages_build_version = urlopen('https://subdomain.func.host/pages-build-version').read().decode()
-        rev_list = subprocess.getoutput('git rev-list {pages_build_version}..{github_sha}').strip()
+        rev_list = subprocess.getoutput(f'git rev-list {pages_build_version}..{github_sha}').strip()
         print(f"::notice::rev_list: {rev_list}")
         print(f"::notice::GITHUB_SHA: {github_sha}")
-        print(f"::notice::pages-build-version: {pages_build_version}")
+        print(f"::notice::pages_build_version: {pages_build_version}")
       env:
         GITHUB_SHA: ${{ github.sha }}
       shell: python
