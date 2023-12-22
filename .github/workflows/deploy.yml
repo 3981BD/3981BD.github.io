@@ -43,7 +43,7 @@ jobs:
         HEAD_SHA=$(git rev-parse HEAD)
 
         # Compare the commit timestamps
-        if [[ $(git show -s --format=%ct $CURRENT_SHA) -gte $(git show -s --format=%ct $HEAD_SHA) ]]; then
+        if [[ $(git show -s --format=%ct $CURRENT_SHA) -ge $(git show -s --format=%ct $HEAD_SHA) ]]; then
           echo "::error::The head SHA for this ref ($HEAD_SHA) is older or the same as the one currently deployed ($CURRENT_SHA)."
           exit 1
         else
