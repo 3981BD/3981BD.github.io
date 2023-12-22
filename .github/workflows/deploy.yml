@@ -39,11 +39,13 @@ jobs:
       run: |
         import subprocess
         import os
+        import json
         from urllib.request import urlopen
         github_sha = os.environ['GITHUB_SHA']
         pages_build_version = urlopen('https://subdomain.func.host/pages-build-version').read().decode()
-        rev_list = subprocess.getoutput(f'git rev-list {pages_build_version}..{github_sha}').strip()
-        print(f"::notice::rev_list: {rev_list}")
+        response = subprocess.getoutput(f'gh api repos/{github.repository_nwo}/compare/{pages_build_version}...{github_sha}').strip()
+        comparison = json.load(response)
+        print(f"::notice::comparison['status']: {comparison['status']}")
         print(f"::notice::GITHUB_SHA: {github_sha}")
         print(f"::notice::pages_build_version: {pages_build_version}")
       env:
