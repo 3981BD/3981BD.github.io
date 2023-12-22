@@ -36,12 +36,11 @@ jobs:
       # If it is and this commit is older, don't continue.
     - name: Check if commit is the latest
       id: check
-      run: check.py
+      run: python3 ./.github/workflows/check.py
       env:
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      shell: python
 
     - uses: actions/setup-node@v4
       with:
