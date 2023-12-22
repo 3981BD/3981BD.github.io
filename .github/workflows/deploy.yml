@@ -32,24 +32,21 @@ jobs:
       if: ${{ github.event_name != 'pull_request_target' }}
       uses: actions/checkout@v4
 
-    - name: Pre Deployment Verification
+      # We should check to see if the latest commit is already deployed
+      # If it is and this commit is older, don't continue.
+    - name: Check if commit is the latest
+      id: check
       run: |
-        # Get the current deployed commit SHA
-        CURRENT_SHA=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/deployments?environment=github-pages" \
-          | jq -r '.[0].sha')
-
-        # Get the head commit SHA for the ref
-        HEAD_SHA=$(git rev-parse HEAD)
-
-        # Compare the commit timestamps
-        if [[ $(git show -s --format=%ct $CURRENT_SHA) -ge $(git show -s --format=%ct $HEAD_SHA) ]]; then
-          echo "::error::The head SHA for this ref ($HEAD_SHA) is older or the same as the one currently deployed ($CURRENT_SHA)."
-          exit 1
-        else
-          echo "::notice::The head SHA for this ref ($HEAD_SHA) is newer the one currently deployed ($CURRENT_SHA)."
-        fi
-
+        import subprocess
+        from urllib.request import urlopen
+        latest_commit = subprocess.getoutput('git rev-parse HEAD').strip()
+        pages_build_version = urlopen('https://subdomain.func.host/pages-build-version').read().decode()
+        print(f"::notice::latest_commit: {latest_commit})
+        print(f"::notice::GITHUB_SHA: {env[GITHUB_SHA]})
+        print(f"::notice::pages-build-version: {pages_build_version}")
+      env:
+        GITHUB_SHA: ${{ github.sha }}
+      shell: python
 
     - uses: actions/setup-node@v4
       with:
