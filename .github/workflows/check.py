@@ -43,3 +43,9 @@ print(f"behind_by: {behind_by}")
 print(f"GITHUB_SHA: {github_sha}")
 print(f"pages_build_version: {pages_build_version}")
 print("::endgroup::")
+
+if status == "behind":
+    error = "This commit is behind the currently deployed site. Deploy will not continue"
+    print(f"::error::{error}")
+    raise Exception(error)
+
