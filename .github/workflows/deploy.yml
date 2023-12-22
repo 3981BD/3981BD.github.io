@@ -53,6 +53,7 @@ jobs:
       env:
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_REPOSITORY: ${{ github.repository }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: python
 
     - uses: actions/setup-node@v4
