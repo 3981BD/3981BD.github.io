@@ -1,5 +1,5 @@
 export const SITE = {
-	title: 'Testing with queue (12/13)',
+	title: 'Testing with fork',
 	description: 'Your website description.',
 	defaultLanguage: 'en_US',
 };
