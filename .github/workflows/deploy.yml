@@ -70,7 +70,7 @@ jobs:
     steps:
       - name: Deploy artifact
         id: deployment
-        uses: tcbyrd/deploy-pages@deployment-ordering
+        uses: actions/deploy-pages@v4
         with:
           # Deploy Pull Request builds to a preview site
           preview: ${{ github.event_name == 'pull_request_target' }}
