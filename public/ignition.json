@@ -1,0 +1,17 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+					"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjyEr+tNzxtRBAGCV1MZsSurPzdJKTWCB5oviPNqymS",
+					"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFzr9WT6wIEd1fgRmjgrw0PiE1kXPNWrGBAGmS+rw7U",
+					"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgoSly4xJD4eVveTqgiUSkAY0T+vjq72Sf3v9q4A/WA"
+        ]
+      }
+    ]
+  }
+}
